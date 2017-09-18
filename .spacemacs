@@ -1,1 +1,1 @@
-.spacemacs
+/Users/huangxiaojing/.spacemacs
