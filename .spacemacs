@@ -31,6 +31,8 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     yaml
+     ;;ivy
      html
      javascript
      ;; ----------------------------------------------------------------
@@ -60,7 +62,7 @@ values."
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(ivy auto-compile)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -312,6 +314,13 @@ before packages are loaded. If you are unsure, you should try in setting them in
   ;; (add-to-list 'load-path "~/org-mode/xml-rpc-el")
   ;; ;;(setq load-path ("~/org-mode/org2blog" load-path))  
   ;; (require 'xml-rpc-el)
+  (add-to-list 'load-path "~/myspacemacs/restclient.el")
+  (require 'restclient)
+  (add-to-list 'load-path "~/myspacemacs/android-mode")
+  (require 'android-mode)
+  (custom-set-variables '(android-mode-sdk-dir "/Users/huangxiaojing/Library/Android/sdk"))
+  (add-to-list 'load-path "~/myspacemacs/exec-path-from-shell-1.11")
+  (require 'exec-path-from-shell)
   )
 
 (defun dotspacemacs/user-config ()
@@ -321,10 +330,6 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-;;  (set org-todo-keywords
-;;     '((sequence "REPORT(r)" "BUG(b)" "KNOWNCAUSE(k)" "|" "FIXED(f)")
-;;     (sequence "TODO(T)" "|" "DONE(D@)3" "CANCELED(C@/!)"))
-;;   )
   (toggle-frame-maximized)
   (defun full-auto-save-all ()
     (interactive)
@@ -366,6 +371,8 @@ you should place your code here."
       (insert "#+END_SRC\n")
       (previous-line 2)
       (org-edit-src-code)))
+
+  (add-hook 'after-init-hook 'global-company-mode)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
