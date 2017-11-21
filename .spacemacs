@@ -62,7 +62,7 @@ values."
    dotspacemacs-additional-packages '(
                                       git
                                       company
-                                      company-meghanada
+                                      ;;company-meghanada
                                       kotlin-mode
                                       company-statistics
                                       company-tern
@@ -313,15 +313,6 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default dotspacemacs-themes '(grandshell badwolf))
-  ;;(require "~/org-mode/xml-rpc-el/xml-rpc.el")
-  ;;(load-file "~/org-mode/emacs-htmlize")
-  ;;(load-file "~/org-mode/metaweblog")
-  ;; (add-to-list 'load-path "~/org-mode/org2blog")
-  ;; ;;(setq load-path ("~/org-mode/org2blog" load-pth))  
-  ;; (require 'org2blog)
-  ;; (add-to-list 'load-path "~/org-mode/xml-rpc-el")
-  ;; ;;(setq load-path ("~/org-mode/org2blog" load-path))  
-  ;; (require 'xml-rpc-el)
   (add-to-list 'load-path "~/myspacemacs/restclient.el")
   (require 'restclient)
   (add-to-list 'load-path "~/myspacemacs/android-mode")
@@ -444,6 +435,22 @@ you should place your code here."
                          (list
                           (cons 'company-tern
                                 (car company-backends)))))))))
+
+  ;; undo tree-mode
+  (add-to-list 'load-path "~/myspacemacs/undo-tree/undo-tree.el")
+
+  (require 'undo-tree)
+  (global-undo-tree-mode 1)
+
+  ;;(require "~/org-mode/xml-rpc-el/xml-rpc.el")
+  ;;(load-file "~/org-mode/emacs-htmlize")
+  ;;(load-file "~/org-mode/metaweblog")
+  ;;(add-to-list 'load-path "~/org-mode/org2blog")
+  ;;(setq load-path ("~/org-mode/org2blog" load-pth))  
+  ;;(require 'org2blog)
+  ;;(add-to-list 'load-path "~/org-mode/xml-rpc-el")
+  ;;(setq load-path ("~/org-mode/org2blog" load-path))  
+  ;;(require 'xml-rpc-el)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
