@@ -62,6 +62,7 @@ values."
    dotspacemacs-additional-packages '(
                                       git
                                       company
+                                      company-meghanada
                                       kotlin-mode
                                       company-statistics
                                       company-tern
@@ -400,6 +401,11 @@ you should place your code here."
                company-ispell
                )
               ))
+      ;;company-meghanada
+      (add-hook 'java-mode
+                (lambda ()
+                  (add-to-list (make-local-variable 'company-backends)
+                               'company-meghanada)))
       (add-hook 'python-mode-hook
                 (lambda ()
                   (add-to-list (make-local-variable 'company-backends)
