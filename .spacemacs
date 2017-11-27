@@ -62,6 +62,7 @@ values."
    dotspacemacs-additional-packages '(
                                       git
                                       company
+                                      org2blog
                                       ;;company-meghanada
                                       kotlin-mode
                                       company-statistics
@@ -320,6 +321,16 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (custom-set-variables '(android-mode-sdk-dir "/Users/huangxiaojing/Library/Android/sdk"))
   (add-to-list 'load-path "~/myspacemacs/exec-path-from-shell-1.11")
   (require 'exec-path-from-shell)
+
+  ;; set org-directory
+  ;;(setq org-directory "~/myblog/org")
+
+  ;;(setq org-list-allow-alphabetical t)
+
+  ;;(require 'org2blog-autoloads)
+  ;;(require 'netrc)
+  
+
   )
 
 (defun dotspacemacs/user-config ()
@@ -436,12 +447,6 @@ you should place your code here."
                           (cons 'company-tern
                                 (car company-backends)))))))))
 
-  ;; undo tree-mode
-  (add-to-list 'load-path "~/myspacemacs/undo-tree/undo-tree.el")
-
-  (require 'undo-tree)
-  (global-undo-tree-mode 1)
-
   ;;(require "~/org-mode/xml-rpc-el/xml-rpc.el")
   ;;(load-file "~/org-mode/emacs-htmlize")
   ;;(load-file "~/org-mode/metaweblog")
@@ -451,6 +456,58 @@ you should place your code here."
   ;;(add-to-list 'load-path "~/org-mode/xml-rpc-el")
   ;;(setq load-path ("~/org-mode/org2blog" load-path))  
   ;;(require 'xml-rpc-el)
+
+  ;; undo tree-mode
+  (add-to-list 'load-path "~/myspacemacs/undo-tree/undo-tree.el")
+
+  (require 'undo-tree)
+  (global-undo-tree-mode 1)
+
+  (setq url-proxy-services '(("http" . "127.0.0.1:8087")))
+
+  ;;  load org2blog
+  (setq load-path (cons "~/myspacemacs/org2blog" load-path))
+  (require 'org2blog-autoloads)
+
+  (setq org2blog/wp-blog-alist
+        '(("wordpress"
+           :url "http://39.108.213.41:8000/xmlrpc.php"
+           :username "huangxiaofeng123321@hotmail.com"
+           :default-title "Hello World"
+           :default-categories ("org2blog" "emacs" "java" "android" "docker")
+           :tags-as-categories nil)
+          ("my-blog"
+           :url "http://username.server.com/xmlrpc.php"
+           :username "admin")))
+
+  (setq helm-follow-mode-persistent t)
+  (eval-after-load 'helm
+    (progn
+      ;; (message "set value after load helm ag")
+      ;; (setq helm-ag--extra-options "--ignore R.* --ignore-dir app/build ")
+      ;; (lambda () (helm-attrset 'follow 1 helm-do-grep-ag))
+      (setq helm-follow-mode-persistent t)
+      ))
+
+  (with-eval-after-load 'helm
+    (progn
+      ;; (setq helm-fuzzy-matching-highlight-fn (quote helm-flx-fuzzy-highlight-match))
+      (setq helm-source-names-using-follow (quote ("AG")))
+      (setq helm-quick-update t)
+      (setq helm-bookmark-show-location t)
+      (setq helm-buffers-fuzzy-matching t)
+      (setq helm-follow-mode t)
+      (setq helm-follow-mode-persistent t)
+      (setq helm-ag-always-set-extra-option t)
+      (setq helm-ag-insert-at-point 'symbol)
+      (setq helm-swoop-pre-input-function
+            (lambda ()
+              (let (($pre-input (thing-at-point 'symbol)))
+                (if (eq (length $pre-input) 0)
+                    helm-swoop-pattern ;; this variable keeps the last used words
+                  $pre-input))))
+      )
+    )
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -465,7 +522,7 @@ you should place your code here."
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
  '(package-selected-packages
    (quote
-    (kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
