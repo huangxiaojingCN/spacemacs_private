@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     zilongshanren-ui
      spell-checking
      yaml
      ;;ivy
