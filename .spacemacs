@@ -343,7 +343,21 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (toggle-frame-maximized)
+  ;; 全屏打开emacs
+  (toggle-frame-maximized) 
+  (require 'helm-bookmark)
+
+  ;; 设置注释快捷键
+  (global-set-key (kbd "C-;") 'spacemacs/comment-or-uncomment-lines)
+
+  ;; 匹配对应s表达是高亮
+  (global-set-key (kbd "C-=") 'er/expand-region)
+  (set-face-background 'hl-line "#3e4446")
+  (set-face-foreground 'hl-line nil)
+  ;; (set-face-foreground 'highlight nil)
+  (set-face-attribute 'region nil :background "#bbddf2")
+
+  ;; 退出emacs屏幕后保存当前文件
   (defun full-auto-save-all ()
     (interactive)
     (save-excursion
@@ -355,9 +369,10 @@ you should place your code here."
               (basic-save-buffer)
               )
           ))))
-  (global-set-key (kbd "C-;") 'spacemacs/comment-or-uncomment-lines)
+  
   (add-hook 'focus-out-hook 'full-auto-save-all)
 
+  ;; 插入不同语言函数模块
   (defun org-insert-src-block (src-code-type)
     "Insert a `SRC-CODE-TYPE' type source code block in org-mode."
     (interactive
@@ -387,6 +402,7 @@ you should place your code here."
 
   (add-hook 'after-init-hook 'global-company-mode)
 
+  ;; 自动补全
   (eval-after-load 'company
     (progn
       (company-flx-mode +1)
@@ -450,24 +466,11 @@ you should place your code here."
                           (cons 'company-tern
                                 (car company-backends)))))))))
 
-  ;;(require "~/org-mode/xml-rpc-el/xml-rpc.el")
-  ;;(load-file "~/org-mode/emacs-htmlize")
-  ;;(load-file "~/org-mode/metaweblog")
-  ;;(add-to-list 'load-path "~/org-mode/org2blog")
-  ;;(setq load-path ("~/org-mode/org2blog" load-pth))  
-  ;;(require 'org2blog)
-  ;;(add-to-list 'load-path "~/org-mode/xml-rpc-el")
-  ;;(setq load-path ("~/org-mode/org2blog" load-path))  
-  ;;(require 'xml-rpc-el)
-
-  ;; undo tree-mode
+  ;; 撤销undo-tree
   (add-to-list 'load-path "~/myspacemacs/undo-tree/undo-tree.el")
-
   (require 'undo-tree)
   (global-undo-tree-mode 1)
-
-  ;;(setq url-proxy-services '(("http" . "127.0.0.1:8087")))
-
+  
   ;;  load org2blog
   (setq load-path (cons "~/myspacemacs/org2blog" load-path))
   (require 'org2blog-autoloads)
