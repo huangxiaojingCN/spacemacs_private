@@ -316,9 +316,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-themes '(badwolf grandshell spacemacs-dark)) 
-  ;;(add-to-list 'load-path "~/myspacemacs/moe-theme.el")
-  ;;(require 'moe-theme)
+  (setq-default dotspacemacs-themes '(badwolf grandshell spacemacs-dark))  
   (add-to-list 'load-path "~/myspacemacs/restclient.el")
   (require 'restclient)
   (add-to-list 'load-path "~/myspacemacs/android-mode")
@@ -326,16 +324,6 @@ before packages are loaded. If you are unsure, you should try in setting them in
   (custom-set-variables '(android-mode-sdk-dir "/Users/huangxiaojing/Library/Android/sdk"))
   (add-to-list 'load-path "~/myspacemacs/exec-path-from-shell-1.11")
   (require 'exec-path-from-shell)
-
-  ;; set org-directory
-  ;;(setq org-directory "~/myblog/org")
-
-  ;;(setq org-list-allow-alphabetical t)
-
-  ;;(require 'org2blog-autoloads)
-  ;;(require 'netrc)
-  ;;(add-hook 'after-init-hook 'linum-relative-toggle)
-
   )
 
 (defun dotspacemacs/user-config ()
@@ -345,6 +333,9 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; 显示bar
+  (setq cursor-type 'bar)
 
   ;; neotree 树状显示文件列表
   (add-to-list 'load-path "~/personal_management/myspacemacs/emacs-neotree/neotree.el")
