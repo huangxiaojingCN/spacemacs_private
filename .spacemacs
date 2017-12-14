@@ -337,6 +337,18 @@ you should place your code here."
   ;; 显示bar
   (setq cursor-type 'bar)
 
+  ;; org-agenda
+  (setq org-agenda-files '("~/working/GTD/working.org"
+                           "~/working/GTD/home.org"
+                           "~/working/GTD/sleep.org"
+                           "~/working/GTD/emacs.org"
+                           "~/working/GTD/android.org"
+                           "~/working/GTD/study_play.org"
+                           "~/working/GTD/amusement.org"
+                           "~/working/GTD/career_planning.org"
+                           "~/working/GTD/data_structures_and_algorithms.org"
+                           ))
+
   ;; neotree 树状显示文件列表
   (add-to-list 'load-path "~/personal_management/myspacemacs/emacs-neotree/neotree.el")
   (require 'neotree)
@@ -528,6 +540,9 @@ you should place your code here."
  '(android-mode-sdk-dir "/Users/huangxiaojing/Library/Android/sdk")
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
+ '(org-agenda-files
+   (quote
+    ("~/AelosMini/app/src/main/java/com/lejurobot/aelos/aelosmini/base/BaseActivity.java" "~/working/GTD/working.org" "~/working/GTD/home.org" "~/working/GTD/sleep.org" "~/working/GTD/emacs.org" "~/working/GTD/android.org" "~/working/GTD/study_play.org" "~/working/GTD/amusement.org" "~/working/GTD/career_planning.org" "~/working/GTD/data_structures_and_algorithms.org")))
  '(package-selected-packages
    (quote
     (memoize font-lock+ all-the-icons lua-mode moe-theme metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
