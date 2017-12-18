@@ -336,6 +336,23 @@ you should place your code here."
 
   ;; 显示bar
   (setq cursor-type 'bar)
+  
+  ;; 增加全局tags配置
+  (setq org-tag-alist '((:startgroup . nil)
+                        ("@work" . ?w)
+                        ("@home" . ?h)
+                        ("@android" . ?a)
+                        ("@sleep" . ?s)
+                        ("@emacs" . ?e)
+                        ("@study_play" . ?y)
+                        ("@amusement" . ?m)
+                        ("@docker" . ?d)
+                        ("@kotlin" . ?k)
+                        ("@fitness" . ?f)
+                        ("@data_structures" . ?r)
+                        ("@nodejs" . ?n)
+                        (:endgroup . nil)
+                        ))
 
   ;; org-agenda
   (setq org-agenda-files '("~/working/GTD/working.org"
@@ -347,8 +364,22 @@ you should place your code here."
                            "~/working/GTD/amusement.org"
                            "~/working/GTD/career_planning.org"
                            "~/working/GTD/data_structures_and_algorithms.org"
+                           "~/working/GTD/kotlin.org"
+                           "~/working/GTD/nodejs.org"
+                           "~/working/GTD/docker.org"
+                           "~/working/GTD/fitness.org"
+                           "~/working/GTD/control_emotion.org"
+                           "~/working/GTD/calculus.org"
                            ))
 
+  ;; 设置org capture存储中断打扰的任务
+  (require 'org)
+  (setq org-capture-templates
+        '(("t" "Todo" entry (file+headline "~/working/GTD/android.org" "Tasks")
+           "* TODO %?\n  %i\n  %a")
+          ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
+           "* %?\nEntered on %U\n  %i\n  %a")))
+  
   ;; neotree 树状显示文件列表
   (add-to-list 'load-path "~/personal_management/myspacemacs/emacs-neotree/neotree.el")
   (require 'neotree)
