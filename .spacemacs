@@ -351,6 +351,8 @@ you should place your code here."
                         ("@fitness" . ?f)
                         ("@data_structures" . ?r)
                         ("@nodejs" . ?n)
+                        ("@urgent" . ?u)
+                        ("@not-urgent" . ?N)
                         (:endgroup . nil)
                         ))
 
@@ -379,6 +381,20 @@ you should place your code here."
            "* TODO %?\n  %i\n  %a")
           ("j" "Journal" entry (file+olp+datetree "~/org/journal.org")
            "* %?\nEntered on %U\n  %i\n  %a")))
+
+  ;; 自定义org agenda cusotm
+  (setq org-agenda-custom-commands 
+        '(("du" "重要紧急" tags-todo "urgent" ;; (1) (2) (3) (4)
+           ((org-agenda-files '("~/working/GTD/working.org")) ;; (5)
+            (org-agenda-sorting-strategy '(priority-up effort-down))) ;; (5) cont.
+            ) ;; (6)
+          ;; ...other commands here
+          ("dn" "重要不紧急" tags-todo "not-urgent" ;; (1) (2) (3) (4)
+           ((org-agenda-files '("~/working/GTD/working.org")) ;; (5)
+            (org-agenda-sorting-strategy '(priority-up effort-down))) ;; (5) cont.
+           )
+          ;; other conmmands here
+          ))
   
   ;; neotree 树状显示文件列表
   (add-to-list 'load-path "~/personal_management/myspacemacs/emacs-neotree/neotree.el")
