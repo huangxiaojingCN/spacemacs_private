@@ -341,6 +341,10 @@ you should place your code here."
   ;; 导入org
   (require 'org)
 
+  (setq org-todo-keywords
+        '((sequence "TODO(t!)" "NEXT(n)" "WAITTING(w)" "SOMEDAY(s)" "|" "DONE(d@/!)" "ABORT(a@/!)")
+          ))
+
   ;; 增加全局tags配置
   (setq org-tag-alist '((:startgroup . nil)
                         ("@work" . ?w)
