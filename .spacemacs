@@ -384,16 +384,12 @@ you should place your code here."
 
   ;; 自定义org agenda cusotm
   (setq org-agenda-custom-commands 
-        '(("du" "重要紧急" tags-todo "urgent" ;; (1) (2) (3) (4)
-           ((org-agenda-files '("~/working/GTD/working.org")) ;; (5)
-            (org-agenda-sorting-strategy '(priority-up effort-down))) ;; (5) cont.
-            ) ;; (6)
-          ;; ...other commands here
-          ("dn" "重要不紧急" tags-todo "not-urgent" ;; (1) (2) (3) (4)
-           ((org-agenda-files '("~/working/GTD/working.org")) ;; (5)
-            (org-agenda-sorting-strategy '(priority-up effort-down))) ;; (5) cont.
-           )
-          ;; other conmmands here
+        '(
+          ("w" . "任务安排")
+          ("wa" "重要紧急的任务" tags-todo "+PRIORITY=\"A\"")
+          ("wb" "重要不紧急的任务" tags-todo "-Weekly-Monthly-Daily+PRIORITY=\"B\"")
+          ("wc" "不重要不紧急的任务" tags-todo "+PRIORITY=\"C\"")
+          ("b" "博客" tags-todo "BLOG")          
           ))
   
   ;; neotree 树状显示文件列表
