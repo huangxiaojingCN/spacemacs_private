@@ -316,7 +316,8 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
-  (setq-default dotspacemacs-themes '(badwolf grandshell spacemacs-dark))  
+  (setq-default dotspacemacs-themes '(badwolf grandshell spacemacs-dark))
+  (setq-default dotspacemacs-startup-banner '"~/mypichture/pichture/jinyiwei2.png")
 	(setq configuration-layer-elpa-archives
          '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
            ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
@@ -330,6 +331,8 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;;(setq-default dotspacemacs-startup-banner '"~/Pictures/icon.jpeg")
 
   ;; 显示bar
   ;;(setq cursor-type 'bar)
