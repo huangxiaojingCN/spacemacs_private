@@ -361,6 +361,7 @@ you should place your code here."
                         ("@nodejs" . ?n)
                         ("@urgent" . ?u)
                         ("@not-urgent" . ?N)
+                        ("@blog" .?b)
                         (:endgroup . nil)
                         ))
 
