@@ -31,6 +31,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
+     plantuml                                     
      games
      lua
      zilongshanren-ui
@@ -62,11 +63,12 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(
+   dotspacemacs-additional-packages '(                                     
                                       git
                                       all-the-icons
                                       company
                                       org2blog
+                                      helm-pass
                                       ;;company-meghanada
                                       kotlin-mode
                                       company-statistics
@@ -332,6 +334,30 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+
+  ;; 执行各语言片段
+  ;; (org-babel-do-load-languages
+  ;;  'org-babel-load-languages
+  ;;  '((emacs-lisp . t)
+  ;;    (ruby . t)    
+  ;;    (python . t)
+  ;;    (sh . t)
+  ;;    (latex . t)
+  ;;    (plantuml . t)
+  ;;    (java . t)
+  ;;    (R . t)))
+
+  ;; active Org-babel languages
+  (org-babel-do-load-languages
+   'org-babel-load-languages
+   '(;; other Babel languages
+     (plantuml . t))) 
+
+  ;; 配置gpg2路径
+  (custom-set-variables '(epg-gpg-program  "/usr/local/bin/gpg2"))
+
+  (setq org-plantuml-jar-path
+        (expand-file-name "~/working/tools/plantuml.jar"))
 
   (setq powerline-default-separator 'arrow)
 
@@ -602,7 +628,7 @@ you should place your code here."
     ("~/AelosMini/app/src/main/java/com/lejurobot/aelos/aelosmini/base/BaseActivity.java" "~/working/GTD/working.org" "~/working/GTD/home.org" "~/working/GTD/sleep.org" "~/working/GTD/emacs.org" "~/working/GTD/android.org" "~/working/GTD/study_play.org" "~/working/GTD/amusement.org" "~/working/GTD/career_planning.org" "~/working/GTD/data_structures_and_algorithms.org")))
  '(package-selected-packages
    (quote
-    (typit mmt sudoku pacmacs 2048-game f badwolf-theme memoize font-lock+ all-the-icons lua-mode moe-theme metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (helm-pass auth-password-store password-store xpm plantuml-mode typit mmt sudoku pacmacs 2048-game f badwolf-theme memoize font-lock+ all-the-icons lua-mode moe-theme metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
