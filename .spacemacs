@@ -413,7 +413,8 @@ you should place your code here."
                            "~/working/GTD/control_emotion.org"
                            "~/working/GTD/calculus.org"
                            "~/working/GTD/toolbox.org"
-                           "~/working/GTD/books.org"                         
+                           "~/working/GTD/books.org"
+                           "~/working/GTD/react-native.org"
                            ))
     
   (setq org-capture-templates
