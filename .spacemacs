@@ -64,6 +64,9 @@ values."
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
    dotspacemacs-additional-packages '(
+                                      rjsx-mode
+                                      switch-window
+                                      ace-jump-mode
                                       counsel
                                       git
                                       all-the-icons
@@ -73,6 +76,7 @@ values."
                                       ;;company-meghanada
                                       kotlin-mode
                                       company-statistics
+                                      tern
                                       company-tern
                                       company-flx)
    ;; A list of packages that cannot be updated.
@@ -334,11 +338,70 @@ This function is called at the very end of Spacemacs initialization after
 layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
-you should place your code here."
- 
+you should place your code here."  
+
+  ;; global binding key
+  (global-set-key (kbd "C-c s") 'ace-jump-char-mode)
+
+  ;; restart - emacs
+  (global-set-key (kbd "C-c e") 'restart-emacs)
+
+  ;; kill emacs
+  (global-set-key (kbd "C-c x") 'kill-emacs)
+
+  (global-set-key (kbd "C-x w o") 'switch-window)
+  (global-set-key (kbd "C-x w 1") 'switch-window-then-maximize)
+  (global-set-key (kbd "C-x w 2") 'switch-window-then-split-below)
+  (global-set-key (kbd "C-x w 3") 'switch-window-then-split-right)
+  (global-set-key (kbd "C-x w 0") 'switch-window-then-delete)
+
+  (global-set-key (kbd "C-x 4 d") 'switch-window-then-dired)
+  (global-set-key (kbd "C-x 4 f") 'switch-window-then-find-file)
+  (global-set-key (kbd "C-x 4 m") 'switch-window-then-compose-mail)
+  (global-set-key (kbd "C-x 4 r") 'switch-window-then-find-file-read-only)
+
+  (global-set-key (kbd "C-x 4 C-f") 'switch-window-then-find-file)
+  (global-set-key (kbd "C-x 4 C-o") 'switch-window-then-display-buffer)
+
+  (global-set-key (kbd "C-x 4 0") 'switch-window-then-kill-buffer)
+
+  (setq switch-window-shortcut-style 'qwerty)
+  (setq switch-window-qwerty-shortcuts
+        '("a" "s" "d" "f" "j" "k" "l" ";" "w" "e" "i" "o"))  
+
+  ;;(setq switch-window-image-directory '/Users/huangxiaojing/personal_management/myspacemacs/img/)
+
+  ;;(setq switch-window-shortcut-appearance 'image)
+
+  ;; (setq switch-window-label-buffer-function
+  ;;       'my-switch-window-label-buffer-function)
+
+  ;; magit log all
+  (global-set-key (kbd "C-c C-l") 'magit-log-all)
+
+  ;; magit fetch
+  (global-set-key (kbd "C-c C-f") 'magit-fetch)
+
+  ;; magit branch and checkout
+  (global-set-key (kbd "C-c C-b") 'magit-branch-and-checkout)
+
   (add-to-list 'load-path "~/personal_management/spacemacs_private/")
   (require 'carlos-gitlab)
- 
+  (eval-after-load 'js2-mode
+    (progn
+      (setq js-indent-level 4)
+      (setq js2-basic-offset 4)
+      (setq js2-highlight-level 4)
+      ;; (define-key js2-mode-map (kbd "<f2>") 'js-send-last-sexp)
+      ;; (define-key js-mode-map (kbd "<f2>") 'js-send-last-sexp)
+      ;; (define-key js2-jsx-mode-map (kbd "<f2>") 'js-send-last-sexp)
+      )
+    )
+
+  (setq-default js2-basic-offset 2)
+
+  ;;
+  (setq-default js-indent-level 2)
 
   ;; 设置 api 路径
   (setq carlos/gitlab-default-gitlaburl "http://112.74.81.51:10088/api/v4")
@@ -642,12 +705,13 @@ you should place your code here."
  '(android-mode-sdk-dir "/Users/huangxiaojing/Library/Android/sdk")
  '(ansi-color-names-vector
    ["#0a0814" "#f2241f" "#67b11d" "#b1951d" "#4f97d7" "#a31db1" "#28def0" "#b2b2b2"])
+ '(epg-gpg-program "/usr/local/bin/gpg2")
  '(org-agenda-files
    (quote
     ("~/AelosMini/app/src/main/java/com/lejurobot/aelos/aelosmini/base/BaseActivity.java" "~/working/GTD/working.org" "~/working/GTD/home.org" "~/working/GTD/sleep.org" "~/working/GTD/emacs.org" "~/working/GTD/android.org" "~/working/GTD/study_play.org" "~/working/GTD/amusement.org" "~/working/GTD/career_planning.org" "~/working/GTD/data_structures_and_algorithms.org")))
  '(package-selected-packages
    (quote
-    (counsel swiper ivy helm-pass auth-password-store password-store xpm plantuml-mode typit mmt sudoku pacmacs 2048-game f badwolf-theme memoize font-lock+ all-the-icons lua-mode moe-theme metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
+    (rjsx-mode switch-window ace-jump-mode typescript-mode helm-smex counsel swiper ivy helm-pass auth-password-store password-store xpm plantuml-mode typit mmt sudoku pacmacs 2048-game f badwolf-theme memoize font-lock+ all-the-icons lua-mode moe-theme metaweblog xml-rpc org2blog kotlin-mode company-flx powerline packed avy iedit smartparens highlight evil undo-tree helm helm-core projectile magit magit-popup git-commit async hydra s unfill mwim git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ dash git-gutter flyspell-correct-helm flyspell-correct flycheck-pos-tip pos-tip flycheck eshell-z eshell-prompt-extras esh-help diff-hl auto-dictionary web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color smeargle shell-pop orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-download multi-term mmm-mode markdown-toc markdown-mode magit-gitflow htmlize helm-gitignore helm-company git ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump define-word column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
