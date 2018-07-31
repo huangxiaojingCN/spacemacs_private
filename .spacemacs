@@ -325,7 +325,7 @@ executes.
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
   (setq-default dotspacemacs-themes '(badwolf grandshell spacemacs-dark))
-  (setq-default dotspacemacs-startup-banner '"~/mypichture/pichture/jinyiwei2.png")
+  (setq-default dotspacemacs-startup-banner '"~/mypichture/pichture/jinyiwei2.jpeg")
 	(setq configuration-layer-elpa-archives
          '(("melpa" . "http://mirrors.tuna.tsinghua.edu.cn/elpa/melpa/")
            ("org"   . "http://mirrors.tuna.tsinghua.edu.cn/elpa/org/")
@@ -496,6 +496,7 @@ you should place your code here."
                            "~/working/GTD/calculus.org"
                            "~/working/GTD/toolbox.org"
                            "~/working/GTD/books.org"
+                           "~/working/GTD/react-native.org"
                            ))
     
   (setq org-capture-templates
